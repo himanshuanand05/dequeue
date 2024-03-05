@@ -1,0 +1,21 @@
+{
+  "name": "books-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "challenge2.js",
+  "scripts": {
+    "test": "mocha **.test.js --delay"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@axe-core/webdriverjs": "^4.8.5",
+    "selenium-webdriver": "^4.18.1"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "mocha": "^10.3.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^6.3.4"
+  }
+}

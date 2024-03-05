@@ -1,0 +1,13 @@
+:host { display: flex; }
+
+.container{
+    margin: 0;
+}
+
+.form-row{
+    display: flex;
+}
+
+.search-button{
+    margin: 1px;
+}

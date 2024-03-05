@@ -1,0 +1,67 @@
+<div class="container">
+    <div >
+      <form (ngSubmit)="onSubmit()" #heroForm="ngForm"  class="form-row">
+        <div class="form-group">
+          <input type="text" class="form-control" id="name" placeholder="Search text" name="searchText"
+                 required
+                 [(ngModel)]="model.searchText" 
+                 #name="ngModel">
+        </div>
+  
+        <!-- <div class="form-group">
+          <label for="power">Hero Power</label>
+          <select class="form-control" id="power"
+                  required
+                  [(ngModel)]="model.power" name="power"
+                  #power="ngModel">
+            <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+          </select>
+          <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
+            Power is required
+          </div>
+        </div> -->
+  
+        <button type="submit" class="btn btn-success search-button" [disabled]="!heroForm.form.valid">Search</button>
+        <div [hidden]="name.valid || name.pristine"
+        class="alert alert-danger">
+     Search text is required
+   </div>
+   <div >
+    <span >Total books found: </span> <span [innerText]="model.totalItems"></span>
+   </div>
+
+      </form>
+    </div>
+    <div>Response Time: {{responseTime}}ms</div>
+    <div >
+        <span >Earliest Publication Date: {{this.model.earliestPublication !=0 ? this.model.earliestPublication.getFullYear(): 0}}</span>
+       </div>
+       <div >
+        <span >Latest Publication Date: {{this.model.latestPublication !=0 ? this.model.latestPublication.getFullYear():0}}</span>
+       </div>
+       <div >
+        <span >Most common author: {{this.model.mostCommonAuthor}} </span>
+       </div>
+    
+    <h1>Books</h1>
+    <ul class="heroes">
+        <li *ngFor="let hero of model.data">
+          <a (click)="fetchBook(hero.id)">
+            <span class="badge">{{hero.volumeInfo.authors?.join(",") + " - " + hero.volumeInfo.title}}</span>
+            <span class="name">{{hero.name}}</span>
+          </a>
+          <div [hidden]="descriptionId != hero.id" [innerText]="hero.volumeInfo.description" style="border-style: solid;">
+
+          </div>
+        </li>
+      </ul>
+      <button class="btn btn-primary" (click)="prevPage()" [disabled]="!model.data.length">previous</button>
+      <input type="text" class="" id="pageIndex" name="pageIndex" [min]="1"
+                 required
+                 [(ngModel)]="model.pageIndex" 
+                 
+                 #name="ngModel">
+        <span> of </span> <span [innerHTML]="model.totalPages"></span>
+      <button class="btn btn-primary" (click)="nextPage()" [disabled]="!model.data.length">next</button>
+
+  </div>

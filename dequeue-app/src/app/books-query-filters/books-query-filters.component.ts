@@ -15,7 +15,10 @@ export class BooksQueryFiltersComponent {
   constructor(private http: HttpClient) { }
   responseTime: any = 0
   descriptionId = ""
-  fetchData(text: string, index: number) {
+  fetchData(text: string, index: number, reset?: boolean) {
+    if(reset){
+      this.model.pageIndex = 1
+    }
     let startTime: any = new Date()
     this.http.get(`https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=${index}&maxResults=10`)
       .subscribe((data: any) => {
@@ -102,7 +105,7 @@ export class BooksQueryFiltersComponent {
 
   nextPage() {
     this.model.pageIndex++
-    this.fetchData(this.model.searchText, this.model.pageIndex)
+    this.fetchData(this.model.searchText, this.model.pageIndex, false)
   }
 
   prevPage() {
@@ -110,7 +113,7 @@ export class BooksQueryFiltersComponent {
     if (this.model.pageIndex < 1) {
       this.model.pageIndex = 1
     }
-    this.fetchData(this.model.searchText, this.model.pageIndex)
+    this.fetchData(this.model.searchText, this.model.pageIndex, false)
 
   }
   powers = ['Really Smart', 'Super Flexible',
@@ -140,7 +143,8 @@ export class BooksQueryFiltersComponent {
 
   onSubmit() {
     this.submitted = true;
-    this.fetchData(this.model.searchText, 1);
+    this.fetchData(this.model.searchText, 1, true
+      );
   }
 
 }

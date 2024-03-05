@@ -20,7 +20,7 @@ export class BooksQueryFiltersComponent {
       this.model.pageIndex = 1
     }
     let startTime: any = new Date()
-    this.http.get(`https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=${index}&maxResults=10`)
+    this.http.get(`https://www.googleapis.com/books/v1/volumes?q=${text}&startIndex=${(index*10)-10+1}&maxResults=10`)
       .subscribe((data: any) => {
         // Handle the data here
         console.log(data["items"]);
